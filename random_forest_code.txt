@@ -1,0 +1,16 @@
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+X = np.array([[85, 950], [90, 980], [80, 890]])
+y = np.array([1200, 980, 1100])
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X_scaled, y)
+
+new_data = scaler.transform([[88, 920]])
+pred = model.predict(new_data)
+print(f"Predicted Energy Output: {pred[0]:.2f} kWh")
